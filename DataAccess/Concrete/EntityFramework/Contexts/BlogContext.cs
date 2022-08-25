@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using DataAccess.Concrete.EntityFramework.Mappings;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework.Contexts
@@ -9,6 +10,15 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         {
             optionsBuilder.UseSqlServer("Server=.;Database=BlogDatabase;Trusted_Connection=True;ConnectTimeout=30;" +
                 "MultipleActiveResultSets=True;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ArticleMap());
+            modelBuilder.ApplyConfiguration(new CategoryMap());
+            modelBuilder.ApplyConfiguration(new CommentMap());
+            modelBuilder.ApplyConfiguration(new RoleMap());
+            modelBuilder.ApplyConfiguration(new UserMap());
         }
 
         public DbSet<Article> Articles { get; set; }
