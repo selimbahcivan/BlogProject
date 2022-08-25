@@ -1,6 +1,8 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework.Mappings
 {
@@ -38,6 +40,27 @@ namespace DataAccess.Concrete.EntityFramework.Mappings
             builder.HasOne<Role>(u => u.Role).WithMany(r => r.Users).HasForeignKey(u => u.RoleId);
 
             builder.ToTable("Users");
+
+            builder.HasData(new User
+            {
+                Id = 1,
+                RoleId = 1,
+                FirstName = "Selim",
+                LastName = "Bahcivan",
+                UserName = "selimbahcivan",
+                Email = "y.selimbahcivan@gmail.com",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Description = "İlk Admin Kullanıcı",
+                Note = "Admin Kullanıcı",
+                PasswordHash = Encoding.ASCII.GetBytes("0192023a7bbd73250516f069df18b500"),
+                Picture= "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSX4wVGjMQ37PaO4PdUVEAliSLi8-c2gJ1zvQ&usqp=CAU"
+
+            });
         }
     }
 }

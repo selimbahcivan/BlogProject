@@ -8,8 +8,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=BlogDatabase;Trusted_Connection=True;ConnectTimeout=30;" +
-                "MultipleActiveResultSets=True;");
+            optionsBuilder.UseSqlServer("Server=.;Database=BlogDatabase;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
