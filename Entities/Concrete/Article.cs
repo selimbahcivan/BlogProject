@@ -1,4 +1,4 @@
-﻿using Shared.Abstract;
+﻿using Shared.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 
