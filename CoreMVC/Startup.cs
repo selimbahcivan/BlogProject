@@ -22,8 +22,9 @@ namespace CoreMVC
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllersWithViews();
+        {                                       // tekrar tekrar derlemeye gerek kalmýyor.
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddAutoMapper(typeof(Startup)); // Derlenme esnasýnda AutoMapper'ýn buradaki sýnýflarý taramasýný saðlýyor.
             services.LoadMyServices();
         }
 
@@ -33,6 +34,7 @@ namespace CoreMVC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages(); // View bulunamadýðýnda gösterilecek sayfa.
             }
             else
             {
@@ -46,6 +48,12 @@ namespace CoreMVC
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute( // Admin Areasý için eklendi.
+                    name: "Admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+                    );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
