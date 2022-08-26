@@ -1,13 +1,10 @@
+using Business.AutoMapper.Profiles;
 using Business.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoreMVC
 {
@@ -24,7 +21,7 @@ namespace CoreMVC
         public void ConfigureServices(IServiceCollection services)
         {                                       // tekrar tekrar derlemeye gerek kalmýyor.
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddAutoMapper(typeof(Startup)); // Derlenme esnasýnda AutoMapper'ýn buradaki sýnýflarý taramasýný saðlýyor.
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile)); // Derlenme esnasýnda AutoMapper'ýn buradaki sýnýflarý taramasýný saðlýyor.
             services.LoadMyServices();
         }
 
