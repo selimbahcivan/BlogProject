@@ -1,6 +1,10 @@
 ﻿using Business.Abstract;
+using CoreMVC.Areas.Admin.Models;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Utilities.Extensions;
 using Shared.Utilities.Results.ComplexTypes;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CoreMVC.Areas.Admin.Controllers
@@ -20,5 +24,34 @@ namespace CoreMVC.Areas.Admin.Controllers
             var result = await _categoryService.GetAll();
             return View(result.Data);
         }
+
+        public IActionResult Add()
+        {
+            return PartialView("_CategoryAddPartial");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(CategoryAddDto categoryAddDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _categoryService.Add(categoryAddDto, "Selim Bahcıvan");
+                if (result.ResultStatus == ResultStatus.Success)
+                {
+                    var categoryAddAjaxModel = JsonSerializer.Serialize(new CategoryAddAjaxViewModel
+                    {
+                        CategoryDto = result.Data,
+                        CategoryAddPartial = await this.RenderViewToStringAsync("_CategoryAddPartial", categoryAddDto)
+                    });
+                    return Json(categoryAddAjaxModel);
+                }
+            }
+            var categoryAddAjaxErrorModel = JsonSerializer.Serialize(new CategoryAddAjaxViewModel
+            {
+                CategoryAddPartial = await this.RenderViewToStringAsync("_CategoryAddPartial", categoryAddDto)
+            });
+            return Json(categoryAddAjaxErrorModel);
+        }
     }
 }
+

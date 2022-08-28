@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text.Json.Serialization;
 
 namespace CoreMVC
 {
@@ -20,7 +21,11 @@ namespace CoreMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {                                       // tekrar tekrar derlemeye gerek kalmýyor.
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; // include edilen(iç içe / nested objeler category'ye dahil olan article nesnesi mesela) convert etmesini saðlar.
+            });
             services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile)); // Derlenme esnasýnda AutoMapper'ýn buradaki sýnýflarý taramasýný saðlýyor.
             services.LoadMyServices();
         }
