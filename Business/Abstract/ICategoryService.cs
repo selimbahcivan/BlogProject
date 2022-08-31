@@ -14,6 +14,8 @@ namespace Business.Abstract
 
         Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActive();
 
+        Task<IDataResult<CategoryUpdateDto>> GetCategoryUpdateDto(int categoryId);
+
         Task<IDataResult<CategoryDto>> Add(CategoryAddDto categoryAddDto, string createdByName);
 
         Task<IDataResult<CategoryDto>> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName);
