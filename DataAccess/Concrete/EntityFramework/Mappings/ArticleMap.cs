@@ -85,7 +85,7 @@ namespace DataAccess.Concrete.EntityFramework.Mappings
                 ModifiedDate = DateTime.Now,
                 Note = "C++ 11 ve 19 Yenilikleri",
                 ViewsCount = 100,
-                CommentsCount=1
+                CommentsCount = 1
             },
             new Article
             {

@@ -108,6 +108,5 @@ namespace Shared.Utilities.Extensions
                 }
             }
         }
-
     }
 }

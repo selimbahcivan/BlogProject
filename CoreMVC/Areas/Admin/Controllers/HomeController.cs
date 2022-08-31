@@ -11,4 +11,3 @@ namespace CoreMVC.Admin.Controllers
         }
     }
 }
-

@@ -54,6 +54,7 @@ namespace Entities.DTOs
         [DisplayName("Kategori")]
         [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
         public int CategoryId { get; set; }
+
         public Category Category { get; set; }
     }
 }

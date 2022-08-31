@@ -7,6 +7,5 @@ namespace Entities.DTOs
     public class ArticleListDto : DtoGetBase
     {
         public IList<Article> Articles { get; set; }
-
     }
 }

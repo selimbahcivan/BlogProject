@@ -9,6 +9,7 @@ namespace Entities.DTOs
     {
         [Required]
         public int Id { get; set; }
+
         [DisplayName("Başlık")]
         [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
         [MaxLength(100, ErrorMessage = "{0} alanı {1} karakterden büyük olmamalıdır.")]
@@ -60,6 +61,7 @@ namespace Entities.DTOs
         [DisplayName("Kategori")]
         [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
         public int CategoryId { get; set; }
+
         public Category Category { get; set; }
     }
 }

@@ -11,12 +11,14 @@ namespace Shared.Utilities.Results.Concrete
             ResultStatus = resultStatus;
             Data = data;
         }
+
         public DataResult(ResultStatus resultStatus, string message, T data)
         {
             ResultStatus = resultStatus;
             Message = message;
             Data = data;
         }
+
         public DataResult(ResultStatus resultStatus, string message, T data, Exception exception)
         {
             ResultStatus = resultStatus;
@@ -24,6 +26,7 @@ namespace Shared.Utilities.Results.Concrete
             Data = data;
             Exception = exception;
         }
+
         public T Data { get; }
 
         public ResultStatus ResultStatus { get; }
