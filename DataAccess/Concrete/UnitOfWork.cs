@@ -11,8 +11,6 @@ namespace DataAccess.Concrete
         private EfArticleRepository _articleRepository;
         private EfCategoryRepository _categoryRepository;
         private EfCommentRepository _commentRepository;
-        private EfRoleRepository _roleRepository;
-        private EfUserRepository _userRepository;
 
         public UnitOfWork(BlogContext context)
         {
@@ -25,9 +23,11 @@ namespace DataAccess.Concrete
 
         public ICommentRepository Comments => _commentRepository ?? new EfCommentRepository(_context);
 
-        public IRoleRepository Roles => _roleRepository ?? new EfRoleRepository(_context);
 
-        public IUserRepository Users => _userRepository ?? new EfUserRepository(_context);
+        // Identityden dolayı sildik.
+        //public IRoleRepository Roles => _roleRepository ?? new EfRoleRepository(_context);
+
+        //public IUserRepository Users => _userRepository ?? new EfUserRepository(_context);
 
         public async ValueTask DisposeAsync()
         {

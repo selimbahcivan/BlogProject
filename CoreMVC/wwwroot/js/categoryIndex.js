@@ -207,9 +207,9 @@
                                     `${categoryDto.Category.Name} adlı kategori başarıyla silinmiştir.`,
                                     'success'
                                 );
-
                                 tableRow.fadeOut(3500);
-                            } else {
+                            }
+                            else {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Başarısız İşlem!',

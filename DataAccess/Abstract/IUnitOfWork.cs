@@ -14,8 +14,10 @@ namespace DataAccess.Abstract
 
         ICategoryRepository Categories { get; }
         ICommentRepository Comments { get; }
-        IRoleRepository Roles { get; }
-        IUserRepository Users { get; }
+
+        // Identity Eklendiği için sildik.
+        //IRoleRepository Roles { get; }
+        //IUserRepository Users { get; }
 
         Task<int> SaveAsync();
     }

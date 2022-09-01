@@ -1,12 +1,14 @@
-﻿using Shared.Entities.Abstract;
+﻿using Microsoft.AspNetCore.Identity;
+using Shared.Entities.Abstract;
 using System.Collections.Generic;
 
 namespace Entities.Concrete
 {
-    public class Role : EntityBase, IEntity
+                         // int PK seçmiş olduk string/guild yerine
+    public class Role : IdentityRole<int>  /*EntityBase, IEntity*/
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public ICollection<User> Users { get; set; }
+        //public string Name { get; set; }
+        //public string Description { get; set; }
+        //public ICollection<User> Users { get; set; }
     }
 }
