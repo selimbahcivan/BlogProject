@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Shared.Entities.Abstract;
-using System.Collections.Generic;
 
 namespace Entities.Concrete
 {
