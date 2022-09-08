@@ -10,6 +10,7 @@ namespace CoreMVC.AutoMapper.Profiles
         {
             CreateMap<UserAddDto, User>();
             CreateMap<User, UserUpdateDto>();
+            CreateMap<UserUpdateDto, User>();
         }
     }
 }
