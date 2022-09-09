@@ -80,6 +80,14 @@ namespace CoreMVC.Areas.Admin.Controllers
                 return View("UserLogin");
             }
         }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home", new { Area = "" });
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<JsonResult> GetAllUsers()
@@ -146,6 +154,13 @@ namespace CoreMVC.Areas.Admin.Controllers
             });
             return Json(userAddAjaxModelStateErrorModel);
         }
+
+        [HttpGet]
+        public ViewResult AccessDenied()
+        {
+            return View();
+        }
+
         [Authorize(Roles = "Admin")]
         public async Task<JsonResult> Delete(int userId)
         {
@@ -246,8 +261,16 @@ namespace CoreMVC.Areas.Admin.Controllers
                 });
                 return Json(userUpdateModelStateErrorViewModel);
             }
-
         }
+        [Authorize]
+        [HttpGet]
+        public async Task<ViewResult> ChangeDetails()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var updateDto = _mapper.Map<UserUpdateDto>(user);
+            return View(updateDto);
+        }
+
         [Authorize(Roles = "Admin,Editor")]
         public async Task<string> ImageUpload(string userName, IFormFile pictureFile)
         {
