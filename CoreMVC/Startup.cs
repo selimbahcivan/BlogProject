@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
 using CoreMVC.AutoMapper.Profiles;
+using CoreMVC.Helpers.Abstract;
+using CoreMVC.Helpers.Concrete;
 using Microsoft.AspNetCore.Http;
 
 namespace CoreMVC
@@ -29,8 +31,9 @@ namespace CoreMVC
                 opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; // include edilen(iç içe / nested objeler category'ye dahil olan article nesnesi mesela) convert etmesini saðlar.
             });
             services.AddSession();
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile),typeof(UserProfile)); // Derlenme esnasýnda AutoMapper'ýn buradaki sýnýflarý taramasýný saðlýyor.
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile), typeof(UserProfile)); // Derlenme esnasýnda AutoMapper'ýn buradaki sýnýflarý taramasýný saðlýyor.
             services.LoadMyServices();
+            services.AddScoped<IImageHelper, ImageHelper>();
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = new PathString("/Admin/User/Login");
@@ -40,11 +43,11 @@ namespace CoreMVC
                     Name = "BlogProject",
                     HttpOnly = true, // XSS (Cross Site Scripting) saldýrýlarýný önler. Cookie'lerin client side'dan eriþimi kýsýtlar.
                     SameSite = SameSiteMode.Strict, // CSRF(Cross Site Request Forgery)/XSRF/Session Riding -> güvenlik açýðý.
-                                                   // Strict Cookie bilgilerinin sadece kendi sitemizden geldiðinde iþlenmesini saðlar. Cookie'nin nereden geldiðine bakar.
+                                                    // Strict Cookie bilgilerinin sadece kendi sitemizden geldiðinde iþlenmesini saðlar. Cookie'nin nereden geldiðine bakar.
                     SecurePolicy = CookieSecurePolicy.SameAsRequest, // Normalde .Always kullanýlýr.
                 };
                 options.SlidingExpiration = true; // 
-                options.ExpireTimeSpan=System.TimeSpan.FromDays(7); // Cookie bilgileri 7 gün boyunca tutulacak.
+                options.ExpireTimeSpan = System.TimeSpan.FromDays(7); // Cookie bilgileri 7 gün boyunca tutulacak.
                 options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied"); // Giriþ yapmýþ ama yetkisi olmayan bir yere girmeye çalýþan kullanýcý için
             });
         }
