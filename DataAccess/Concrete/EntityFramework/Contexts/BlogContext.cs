@@ -7,9 +7,14 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 {                                                       // PK'i int yaptık normalde Guild/String üretiyor.
     public class BlogContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken> /* : DbContext*/
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=.;Database=BlogDatabase;Trusted_Connection=True;");
+        //}
+
+        public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=BlogDatabase;Trusted_Connection=True;");
+                
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

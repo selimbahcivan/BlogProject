@@ -32,7 +32,7 @@ namespace CoreMVC
             });
             services.AddSession();
             services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile), typeof(UserProfile)); // Derlenme esnasýnda AutoMapper'ýn buradaki sýnýflarý taramasýný saðlýyor.
-            services.LoadMyServices();
+            services.LoadMyServices(connectionString: Configuration.GetConnectionString("LocalDB"));
             services.AddScoped<IImageHelper, ImageHelper>();
             services.ConfigureApplicationCookie(options =>
             {
